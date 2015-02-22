@@ -12,7 +12,7 @@ public class Chaat {
 	static HashMap<String, String> names;
 	public static void main(String[] args) {
 		names = new HashMap<>();
-		connections = new Vector();
+		connections = new Vector<>();
 		try {
 			ServerSocket chatter = new ServerSocket(9090);
 			connections.add(System.out);
@@ -44,7 +44,7 @@ public class Chaat {
 
 			try {
 				out = new PrintStream(s.getOutputStream());
-				
+
 				boolean newName = false;
 				Scanner b = new Scanner(new InputStreamReader(
 						s.getInputStream()));
@@ -63,8 +63,11 @@ public class Chaat {
 					String sss = b.nextLine();
 					say(name + ": " + sss);
 				}
+				names.remove(name);
+				connections.remove(out);
 				say(name + " disconnected");
-				s.close();
+
+				b.close();
 				out.close();
 				s.close();
 			} catch (IOException e) {
