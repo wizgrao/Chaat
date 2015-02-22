@@ -11,6 +11,7 @@ public class Chaat {
 	static Vector<PrintStream> connections;
 	static HashMap<String, String> names;
 	public static void main(String[] args) {
+		names = new HashMap<>();
 		connections = new Vector();
 		try {
 			ServerSocket chatter = new ServerSocket(9090);
@@ -43,7 +44,7 @@ public class Chaat {
 
 			try {
 				out = new PrintStream(s.getOutputStream());
-				connections.add(out);
+				
 				boolean newName = false;
 				Scanner b = new Scanner(new InputStreamReader(
 						s.getInputStream()));
@@ -62,6 +63,7 @@ public class Chaat {
 					String sss = b.nextLine();
 					say(name + ": " + sss);
 				}
+				say(name + " disconnected");
 				s.close();
 				out.close();
 				s.close();
